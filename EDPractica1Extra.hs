@@ -46,7 +46,9 @@ libreDeCuadrados'' (x,y) | y^2 <= x   = if mod x (y^2) == 0 then y else libreDeC
 ----------------------------------------------------------------------
 
 sumaDigitos :: Integer -> Integer
-sumaDigitos n = undefined
+sumaDigitos n | n < 0     = error "sumaDigitos: argumento negativo"
+              | n < 10    = n
+              | otherwise = (mod n 10) + sumaDigitos (div n 10)
 
 harshad :: Integer -> Bool
 harshad x = undefined
