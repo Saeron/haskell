@@ -65,13 +65,15 @@ vecesHarshad n | n <= 0             = error "vecesHarshad: argumento no positivo
 
 prop_Boem_Harshad_OK :: Integer -> Property
 prop_Boem_Harshad_OK n = n > 0  ==> vecesHarshad (1008 * 10^n) == n +2 
+--OK, passed 100 tests.
 
 ----------------------------------------------------------------------
 -- Ejercicio - ceros del factorial
 ----------------------------------------------------------------------
 
 factorial :: Integer -> Integer
-factorial n  = undefined
+factorial n | n > 1 = n * factorial (n-1)
+            | otherwise = 1 
 
 cerosDe :: Integer -> Integer
 cerosDe n = undefined
