@@ -51,7 +51,8 @@ sumaDigitos n | n < 0     = error "sumaDigitos: argumento negativo"
               | otherwise = (mod n 10) + sumaDigitos (div n 10)
 
 harshad :: Integer -> Bool
-harshad x = undefined
+harshad x | x <= 0     = error "harshad: argumento no positivo"
+          | otherwise = mod x (sumaDigitos x) == 0
 
 harshadMultiple :: Integer -> Bool
 harshadMultiple n = undefined
