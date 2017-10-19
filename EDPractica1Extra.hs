@@ -102,7 +102,10 @@ Responde las siguientes preguntas:
 ----------------------------------------------------------------------
 
 fib :: Integer -> Integer
-fib n  = undefined
+fib n | n < 0 = error "fib: argumento negativo"
+      | n == 0 = 0
+      | n == 1 = 1
+      | otherwise = fib (n-1) + fib (n-2)
 
 llamadasFib :: Integer -> Integer
 llamadasFib n = undefined
