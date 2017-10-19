@@ -21,7 +21,7 @@ esPrimo n | n <= 0 = error " esPrimo: argumento negativo o cero"
 
 esPrimo':: (Integral a) => (a,a) -> Bool
 esPrimo' (x,y) | y > 1     = mod x y /= 0 && esPrimo' (x,y-1)
-               | otherwise = True 
+               | otherwise = True
 
 ----------------------------------------------------------------------
 -- Ejercicio - libre de cuadrados
@@ -34,7 +34,7 @@ libreDeCuadrados n | n <= 0 = error "libreDeCuadrados: argumento cero o negativo
 
 libreDeCuadrados' :: (Integer, Integer) -> Bool
 libreDeCuadrados' (x,y) | y^2 <= x   = mod x (y^2) /= 0 && libreDeCuadrados' (x,y+1)
-                        | otherwise = True  
+                        | otherwise = True
 --Código para ayudar a depurar
 libreDeCuadrados'' :: (Integer, Integer) -> Integer
 libreDeCuadrados'' (x,y) | y^2 <= x   = if mod x (y^2) == 0 then y else libreDeCuadrados'' (x,y+1)
@@ -55,16 +55,16 @@ harshad x | x <= 0     = error "harshad: argumento no positivo"
           | otherwise = mod x (sumaDigitos x) == 0
 
 harshadMultiple :: Integer -> Bool
-harshadMultiple n | n <= 0    = error "harshadMultiple: argumento no positivo" 
+harshadMultiple n | n <= 0    = error "harshadMultiple: argumento no positivo"
                   | otherwise = harshad n && harshad (div n (sumaDigitos n))
 
 vecesHarshad :: Integer -> Integer
 vecesHarshad n | n <= 0             = error "vecesHarshad: argumento no positivo"
                | sumaDigitos n == 1 = 1
-               | otherwise = if harshad n then 1 + vecesHarshad (div n (sumaDigitos n)) else 0 
+               | otherwise = if harshad n then 1 + vecesHarshad (div n (sumaDigitos n)) else 0
 
 prop_Boem_Harshad_OK :: Integer -> Property
-prop_Boem_Harshad_OK n = n > 0  ==> vecesHarshad (1008 * 10^n) == n +2 
+prop_Boem_Harshad_OK n = n > 0  ==> vecesHarshad (1008 * 10^n) == n +2
 --OK, passed 100 tests.
 
 ----------------------------------------------------------------------
@@ -73,7 +73,7 @@ prop_Boem_Harshad_OK n = n > 0  ==> vecesHarshad (1008 * 10^n) == n +2
 
 factorial :: Integer -> Integer
 factorial n | n > 1 = n * factorial (n-1)
-            | otherwise = 1 
+            | otherwise = 1
 
 cerosDe :: Integer -> Integer
 cerosDe n | n == 0    = 1
@@ -122,44 +122,47 @@ Responde a las siguientes preguntas:
 2692537
 
 ¿Cuántas llamadas a fib son necesarias para calcular fib 36?
-
+48315633
 
 -}
 fibAc :: Integer -> Integer -> Integer -> Integer
-fibAc n x y | 
+fibAc n x y | n > 0 = fibAc (n-1) y (x+y)
+            | otherwise = x
 
 fib' :: Integer -> Integer
-fib' n = fibAc n 0 1
+fib' n | n < 0 = error "fib': argumento negativo"
+       | otherwise = fibAc n 0 1
 
 prop_fib_OK :: Integer -> Property
-prop_fib_OK n = undefined
-
+prop_fib_OK n = n > 0 && n <= 30 ==> fib n == fib' n
+--OK, passed 100 tests.
 {-
 
 Responde a las siguientes preguntas:
 
 ¿Cuántas llamadas a fib son necesarias para calcular fib' 30?
-
+30
 
 ¿Cuántas llamadas a fib son necesarias para calcular fib' 36?
-
+36
 
 -}
 
 
 phi :: Double
-phi = undefined
+phi = (1 + sqrt 5) / 2
 
 binet :: Integer -> Integer
-binet n = undefined
+binet n = round ((phi^n - (1 - phi)^n) / sqrt 5)
 
 prop_fib'_binet_OK :: Integer -> Property
-prop_fib'_binet_OK n = undefined
+prop_fib'_binet_OK n = n > 0 ==> fib' n == binet n
 
 {-
 
 Responde a la siguiente pregunta:
 
 ¿A partir de qué valor devuelve binet resultados incorrectos?
-
+Failed! Falsifiable (after 82 tests):
+76
 -}
