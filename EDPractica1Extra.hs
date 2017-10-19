@@ -55,7 +55,8 @@ harshad x | x <= 0     = error "harshad: argumento no positivo"
           | otherwise = mod x (sumaDigitos x) == 0
 
 harshadMultiple :: Integer -> Bool
-harshadMultiple n = undefined
+harshadMultiple n | n <= 0    = error "harshadMultiple: argumento no positivo" 
+                  | otherwise = harshad n && harshad (div n (sumaDigitos n))
 
 vecesHarshad :: Integer -> Integer
 vecesHarshad n = undefined
