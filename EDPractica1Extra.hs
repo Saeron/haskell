@@ -76,7 +76,8 @@ factorial n | n > 1 = n * factorial (n-1)
             | otherwise = 1 
 
 cerosDe :: Integer -> Integer
-cerosDe n = undefined
+cerosDe n | n == 0    = 1
+          | otherwise =if mod n 10 == 0 then 1 + cerosDe (div n 10) else 0
 
 prop_cerosDe_OK :: Integer -> Integer -> Property
 prop_cerosDe_OK n m = undefined
