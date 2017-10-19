@@ -108,22 +108,28 @@ fib n | n < 0 = error "fib: argumento negativo"
       | otherwise = fib (n-1) + fib (n-2)
 
 llamadasFib :: Integer -> Integer
-llamadasFib n = undefined
+llamadasFib n | n < 0 = error "fib: argumento negativo"
+              | n == 0 = 1
+              | n == 1 = 1
+              | otherwise = 1 + llamadasFib (n-1) + llamadasFib (n-2)
+
 
 {-
 
 Responde a las siguientes preguntas:
 
 ¿Cuántas llamadas a fib son necesarias para calcular fib 30?
-
+2692537
 
 ¿Cuántas llamadas a fib son necesarias para calcular fib 36?
 
 
 -}
+fibAc :: Integer -> Integer -> Integer -> Integer
+fibAc n x y | 
 
 fib' :: Integer -> Integer
-fib' n = undefined
+fib' n = fibAc n 0 1
 
 prop_fib_OK :: Integer -> Property
 prop_fib_OK n = undefined
