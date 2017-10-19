@@ -2,7 +2,7 @@
 -- Estructuras de Datos. 2º ETSI Informática. UMA
 -- Práctica 1 - Ejercicios extra
 --
--- Alumno: APELLIDOS, NOMBRE
+-- Alumno: Gutiérrez Ojeda, Antonio
 -------------------------------------------------------------------------------
 
 
@@ -28,7 +28,18 @@ esPrimo' (x,y) | y > 1     = mod x y /= 0 && esPrimo' (x,y-1)
 ----------------------------------------------------------------------
 
 libreDeCuadrados :: Integer -> Bool
-libreDeCuadrados n = undefined
+libreDeCuadrados n | n <= 0 = error "libreDeCuadrados: argumento cero o negativo"
+                   | n == 1 = True
+                   | otherwise = libreDeCuadrados' (n,2)
+
+libreDeCuadrados' :: (Integer, Integer) -> Bool
+libreDeCuadrados' (x,y) | y^2 <= x   = mod x (y^2) /= 0 && libreDeCuadrados' (x,y+1)
+                        | otherwise = True  
+--Código para ayudar a depurar
+libreDeCuadrados'' :: (Integer, Integer) -> Integer
+libreDeCuadrados'' (x,y) | y^2 <= x   = if mod x (y^2) == 0 then y else libreDeCuadrados'' (x,y+1)
+                         | otherwise = 0
+
 
 ----------------------------------------------------------------------
 -- Ejercicio - números de Harshad
