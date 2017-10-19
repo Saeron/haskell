@@ -59,7 +59,9 @@ harshadMultiple n | n <= 0    = error "harshadMultiple: argumento no positivo"
                   | otherwise = harshad n && harshad (div n (sumaDigitos n))
 
 vecesHarshad :: Integer -> Integer
-vecesHarshad n = undefined
+vecesHarshad n | n <= 0                     = error "vecesHarshad: argumento no positivo"
+               | sumaDigitos n == 1 = 1
+               | otherwise  = if harshad n then 1 + vecesHarshad (div n (sumaDigitos n)) else 0 
 
 prop_Boem_Harshad_OK :: Integer -> Property
 prop_Boem_Harshad_OK n = undefined
