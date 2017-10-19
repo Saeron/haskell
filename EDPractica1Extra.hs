@@ -80,7 +80,8 @@ cerosDe n | n == 0    = 1
           | otherwise =if mod n 10 == 0 then 1 + cerosDe (div n 10) else 0
 
 prop_cerosDe_OK :: Integer -> Integer -> Property
-prop_cerosDe_OK n m = undefined
+prop_cerosDe_OK n m = m > 0 && m < 1000 && n > 0 ==> cerosDe (n*10^m) == cerosDe n + m
+--OK, passed 100 tests.
 
 {-
 
