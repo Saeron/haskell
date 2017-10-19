@@ -81,20 +81,19 @@ cerosDe n | n == 0    = 1
 
 prop_cerosDe_OK :: Integer -> Integer -> Property
 prop_cerosDe_OK n m = m > 0 && m < 1000 && n > 0 ==> cerosDe (n*10^m) == cerosDe n + m
---OK, passed 100 tests.
 
 {-
 
 Responde las siguientes preguntas:
 
 ¿En cuańtos ceros acaba el factorial de 10?
-
+2
 ¿En cuańtos ceros acaba el factorial de 100?
-
+24
 ¿En cuańtos ceros acaba el factorial de 1000?
-
+249
 ¿En cuańtos ceros acaba el factorial de 10000?
-
+2499
 
 -}
 
