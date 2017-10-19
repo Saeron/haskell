@@ -14,8 +14,14 @@ import Test.QuickCheck
 -- Ejercicio - esPrimo
 ----------------------------------------------------------------------
 
--- esPrimo :: completa la definición de tipo
-esPrimo n = undefined
+esPrimo :: (Integral a) => a -> Bool
+esPrimo n | n <= 0 = error " esPrimo: argumento negativo o cero"
+          | n == 1 = False
+          | otherwise = esPrimo' (n,n-1)
+
+esPrimo':: (Integral a) => (a,a) -> Bool
+esPrimo' (x,y) | y > 1     = mod x y /= 0 && esPrimo' (x,y-1)
+               | otherwise = True 
 
 ----------------------------------------------------------------------
 -- Ejercicio - libre de cuadrados
