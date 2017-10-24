@@ -37,3 +37,14 @@ maximo (x:y:xs) = if x >= y then maximo (x:xs) else maximo (y:xs)
 resto :: (Eq a,Ord a) => a -> [a] ->[a] -> [a]
 resto x [] ys = reverse ys
 resto x (y:xs) ys = if x /= y then resto x xs (y:ys) else resto x xs ys
+
+--Ejercicio 3--
+reparte :: [a] -> ([a],[a])
+reparte []  = error "reparte: lista vacia"
+reparte [x] = ([x],[])
+reparte (x:y:xs) = reparte' (x:y:xs) ([],[])
+
+reparte' :: [a] -> ([a],[a]) -> ([a],[a])
+reparte' [] ys = ys
+reparte' [x] (zs,ys) = (zs ++ [x], ys)
+reparte' (x:y:xs) (zs,ys) = reparte' xs (zs ++ [x], ys ++ [y])
