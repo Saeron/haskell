@@ -48,3 +48,9 @@ reparte' :: [a] -> ([a],[a]) -> ([a],[a])
 reparte' [] ys = ys
 reparte' [x] (zs,ys) = (zs ++ [x], ys)
 reparte' (x:y:xs) (zs,ys) = reparte' xs (zs ++ [x], ys ++ [y])
+
+--Ejercicio 4--
+distintos :: Ord a => [a] -> Bool
+distintos [] = error "distintos: lista vacia"
+distintos [x] = True
+distintos (x:y:xs) = x /= y && distintos (x:xs) && distintos (y:xs)
