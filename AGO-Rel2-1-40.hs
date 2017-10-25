@@ -54,3 +54,9 @@ distintos :: Ord a => [a] -> Bool
 distintos [] = error "distintos: lista vacia"
 distintos [x] = True
 distintos (x:y:xs) = x /= y && distintos (x:xs) && distintos (y:xs)
+
+--Ejercicio 5-
+--a--
+replicate' :: Int -> a -> [a]
+replicate' n x | n == 0 = []
+               | otherwise = [y | y <- [1..n], let y = x]
