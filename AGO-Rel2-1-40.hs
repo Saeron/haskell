@@ -77,3 +77,14 @@ divideA x y | mod y x == 0 = True
 --segunda parte--
 divisores' ::  Int -> [Int]
 divisores' n = (reverse [x*(-1) | x <- [1..n], divideA x n])++[x | x <- [1..n], divideA x n]
+
+--Ejercicio 7--
+--a--
+mcd :: Int -> Int -> Int
+mcd a b = maximum [x | x <-(divisores a), y <-(divisores b), x==y]
+--b--
+p_mcd x y z = x>0 && y>0 && z>0 ==> mcd (z*x) (z*y) == z * mcd x y
+ --OK, passed 100 tests.
+ --c--
+mcm :: Int -> Int -> Int
+mcm x y = div (x*y) (mcd x y)
