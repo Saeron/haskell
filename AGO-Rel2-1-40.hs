@@ -60,3 +60,13 @@ distintos (x:y:xs) = x /= y && distintos (x:xs) && distintos (y:xs)
 replicate' :: Int -> a -> [a]
 replicate' n x | n == 0 = []
                | otherwise = [y | y <- [1..n], let y = x]
+--b--
+--p_replicate'
+
+--Ejercicio 6--
+divisores ::  Int -> [Int]
+divisores n = [x | x <- [1..n], divideA x n] 
+
+divideA :: Int -> Int -> Bool
+divideA x y | mod y x == 0 = True
+            | otherwise = False  
