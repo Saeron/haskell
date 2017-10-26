@@ -126,3 +126,14 @@ esPerfecto n = foldr (+) 0 [x | x <- (divisores n) , x/=n] == n && n > 0
 --b--
 perfectosMenoresQue :: Int -> [Int]
 perfectosMenoresQue n = [x | x <- [0..n], esPerfecto x]
+
+--Ejercicio 11--
+--a--
+take' :: Int -> [a] -> [a]
+take' n xs = [x | (p,x) <- zip[0..n-1] xs]
+--b--
+drop' :: Int -> [a] -> [a]
+drop' n xs = [x | (p,x) <-zip [0..(length xs)-1] xs, p >=n]
+--c--
+p_dropTake n xs = n>=0 ==> (take' n xs) ++ (drop' n xs) == xs
+--OK, passed 100 tests.
