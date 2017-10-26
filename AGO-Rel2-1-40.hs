@@ -137,3 +137,11 @@ drop' n xs = [x | (p,x) <-zip [0..(length xs)-1] xs, p >=n]
 --c--
 p_dropTake n xs = n>=0 ==> (take' n xs) ++ (drop' n xs) == xs
 --OK, passed 100 tests.
+
+--Ejercicio 12--
+--a--
+concat' :: [[a]] -> [a]
+concat' xs = foldr (++) [] xs
+--b
+concat'' :: [[a]] -> [a]
+concat'' xs = [y | x <- xs, y <- x]
