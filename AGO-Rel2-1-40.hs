@@ -74,3 +74,6 @@ divisores n = [x | x <- [1..n], divideA x n]
 divideA :: Int -> Int -> Bool
 divideA x y | mod y x == 0 = True
             | otherwise = False
+--segunda parte--
+divisores' ::  Int -> [Int]
+divisores' n = (reverse [x*(-1) | x <- [1..n], divideA x n])++[x | x <- [1..n], divideA x n]
