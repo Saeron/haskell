@@ -88,3 +88,17 @@ p_mcd x y z = x>0 && y>0 && z>0 ==> mcd (z*x) (z*y) == z * mcd x y
  --c--
 mcm :: Int -> Int -> Int
 mcm x y = div (x*y) (mcd x y)
+
+--Ejercicio 8--
+--a--
+esPrimo :: Int -> Bool
+esPrimo x = length (divisores x) == 2
+--b--
+primosHasta :: Int -> [Int]
+primosHasta x = [y | y <- [0..x],esPrimo y]
+--c--
+primosHasta' :: Int -> [Int]
+primosHasta' x = filter esPrimo [0..x]
+--d--
+p1_primos x = primosHasta x == primosHasta' x
+--OK, passed 100 tests.
