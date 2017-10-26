@@ -145,3 +145,8 @@ concat' xs = foldr (++) [] xs
 --b
 concat'' :: [[a]] -> [a]
 concat'' xs = [y | x <- xs, y <- x]
+
+--Ejercicio 13--
+desconocida :: (Ord a) => [a] -> Bool
+desconocida xs = and [ x<=y | (x,y) <- zip xs (tail xs) ]
+--Coje una lista de elementos que tengan orden y comprueba si estan ordenados
