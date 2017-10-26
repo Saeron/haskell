@@ -118,3 +118,11 @@ golbachHasta n = and [x | y <- [4..n], let x = (golbach y), even y]
 --d--
 golbachDebilHasta :: Int -> Bool
 golbachDebilHasta n = and [x | y <- [7..n], let x = (golbach (y-3)), not (even y)]
+
+--Ejercicio 10--
+--a--
+esPerfecto :: Int -> Bool
+esPerfecto n = foldr (+) 0 [x | x <- (divisores n) , x/=n] == n && n > 0
+--b--
+perfectosMenoresQue :: Int -> [Int]
+perfectosMenoresQue n = [x | x <- [0..n], esPerfecto x]
