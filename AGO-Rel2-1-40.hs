@@ -102,3 +102,19 @@ primosHasta' x = filter esPrimo [0..x]
 --d--
 p1_primos x = primosHasta x == primosHasta' x
 --OK, passed 100 tests.
+
+--Ejercicio 9--
+--a--
+pares :: Int -> [(Int,Int)]
+pares n | n < 2 = []
+        | even n = [(x,y) | x <- (primosHasta n), y <- (primosHasta n), x + y == n && x <= y]
+        | otherwise = []
+--b--
+golbach :: Int -> Bool
+golbach x = length (pares x) > 0
+--c--
+golbachHasta :: Int -> Bool
+golbachHasta n = and [x | y <- [4..n], let x = (golbach y), even y]
+--d--
+golbachDebilHasta :: Int -> Bool
+golbachDebilHasta n = and [x | y <- [7..n], let x = (golbach (y-3)), not (even y)]
