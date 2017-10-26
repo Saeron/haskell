@@ -9,7 +9,7 @@
 ---- Relación de Ejercicios 2. Ejercicios resueltos: ..........
 ----
 ---------------------------------------------------------------------------------
-
+import Test.QuickCheck
 --Ejercicio 1--
 data Direction = North | South | East | West
      deriving (Eq,Ord,Enum,Show)
@@ -61,12 +61,16 @@ replicate' :: Int -> a -> [a]
 replicate' n x | n == 0 = []
                | otherwise = [y | y <- [1..n], let y = x]
 --b--
---p_replicate'
+p_replicate' n x = n >= 0 && n <= 1000 ==> length (filter (==x) xs) == n
+ && length (filter (/=x) xs) == 0
+ where xs = replicate' n x
+ --c--
+ --OK, passed 100 tests.
 
 --Ejercicio 6--
 divisores ::  Int -> [Int]
-divisores n = [x | x <- [1..n], divideA x n] 
+divisores n = [x | x <- [1..n], divideA x n]
 
 divideA :: Int -> Int -> Bool
 divideA x y | mod y x == 0 = True
-            | otherwise = False  
+            | otherwise = False
