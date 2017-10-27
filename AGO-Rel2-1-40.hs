@@ -194,3 +194,24 @@ multiplosDe k = iterate (+k) 0
 --d--
 potenciasDe :: Num a => a -> [a]
 potenciasDe k = iterate (*k) 1
+
+--Ejercicio 16--
+--a--
+multiplosDe' :: (Ord a, Num a) => a -> [a]
+multiplosDe' k | k < 0 = error "Debe ser mayor que 0"
+               | otherwise = iterate (+k) k
+--b--
+primeroComun ::  (Ord a) => [a] -> [a] -> a
+primeroComun (x:xs) (y:ys)
+ | x > y = primeroComun (x:xs) ys
+ | x < y = primeroComun xs (y:ys)
+ | otherwise = x
+--primeroComun xs ys = minimum [x | x <- xs, y <- ys , x==y]
+--c--
+mcm' :: Int -> Int -> Int
+mcm' x y = primeroComun (multiplosDe' x) (multiplosDe' y)
+--d--
+p_mcm x y = x>=0 && y>=0 ==> mcm' x y == lcm x y
+--p_mcm x y = x>0 && y>0 ==> mcm x y == lcm x y
+-- con numeros igual a 0 no debe de funcionar, lampoco funciona lcm
+--OK, passed 100 tests.
