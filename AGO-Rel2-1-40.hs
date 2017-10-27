@@ -150,3 +150,47 @@ concat'' xs = [y | x <- xs, y <- x]
 desconocida :: (Ord a) => [a] -> Bool
 desconocida xs = and [ x<=y | (x,y) <- zip xs (tail xs) ]
 --Coje una lista de elementos que tengan orden y comprueba si estan ordenados
+
+--Ejercicio 14--
+--a--
+inserta :: Int -> [Int] -> [Int]
+inserta n xs = (takeWhile (<n) xs)++(n:[])++(dropWhile (<n) xs)
+--b--
+inserta' :: Ord a => a -> [a] -> [a]
+inserta' n [] = n:[]
+inserta' n (x:xs) = if n > x then x:(inserta' n xs) else n:x:xs
+--c--
+p1_inserta x xs = desconocida xs ==> desconocida (inserta x xs)
+--Gave up! Passed only 72 tests.
+--comprueba si inserta lo hace de forma ordenada
+--d--
+--Es como un fold que crea una lista ordenada a partir de una vacia y una desordenada
+--e--
+ordena :: Ord a => [a] -> [a]
+ordena xs = foldr (inserta') [] xs
+--f--
+p_ordena xs = True ==> desconocida (ordena xs)
+--OK, passed 100 tests.
+--g--
+-- No se aun bien--
+
+--Ejercicio 15--
+--a--
+geometrica :: Num a => a -> a -> [a]
+geometrica i k = iterate (*k) i
+--b--
+p1_geometrica x r = x>0 && r>0 ==>
+ and [ div z y == r | (y,z) <- zip xs (tail xs) ]
+ where xs = take 100 (geometrica x r)
+ --OK, passed 100 tests.
+ --Comprueba que al dividir un numero de la geometrica por su anterior
+ --obtines como resultado la constante de la geometrica, hay que tener
+ --cuidado con definir geometrica como Int, en este caso no tiene sufi-
+ --ciente capacidad para 100 elementos y se quedan en 0(no se cumple).
+
+ --c--
+multiplosDe :: Num a => a -> [a]
+multiplosDe k = iterate (+k) 0
+--d--
+potenciasDe :: Num a => a -> [a]
+potenciasDe k = iterate (*k) 1
