@@ -215,3 +215,12 @@ p_mcm x y = x>=0 && y>=0 ==> mcm' x y == lcm x y
 --p_mcm x y = x>0 && y>0 ==> mcm x y == lcm x y
 -- con numeros igual a 0 no debe de funcionar, lampoco funciona lcm
 --OK, passed 100 tests.
+
+ --Ejercicio 17--
+primeroComunDeTres :: Ord a => [a] -> [a] -> [a] -> a
+primeroComunDeTres (x:xs) (y:ys) (z:zs)
+ | x > y = primeroComunDeTres (x:xs) ys (z:zs)
+ | x > z = primeroComunDeTres (x:xs) (y:ys) zs
+ | y > x = primeroComunDeTres xs (y:ys) (z:zs)
+ | z > x = primeroComunDeTres xs (y:ys) (z:zs)
+ | otherwise = x
