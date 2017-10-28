@@ -224,3 +224,36 @@ primeroComunDeTres (x:xs) (y:ys) (z:zs)
  | y > x = primeroComunDeTres xs (y:ys) (z:zs)
  | z > x = primeroComunDeTres xs (y:ys) (z:zs)
  | otherwise = x
+
+ --Ejercicio 18--
+factPrimos :: Integer -> [Integer]
+factPrimos x = fp x 2
+ where
+    fp x d
+      | x' < d = [x]
+      | r == 0 = d : fp x' d
+      | otherwise = fp x (d+1)
+       where (x',r) = divMod x d -- cociente y resto
+
+--a--
+
+--b--
+--Son todos primos por que al empezar con 2 por ejemplo y dividir entre el
+--hasta que el resto no de 0 elminias la posibilidad de que sea dividido entre
+--4 y asi susesivamente, ya que los demás numeros acaban siendo composisión
+-- de los números primos previos.
+ --Se para en x' < d por que eso significa que el divisor es el dividendo,
+ -- ya no hay mas que dividir
+ --c--
+factPrimos' :: Integer -> [Integer]
+factPrimos' x = fp x 2
+  where
+     fp x d
+       | x' < d = [x]
+       | r == 0 = d : fp x' d
+       | even d && d > 2 = fp x (d+1)
+       | otherwise = fp x (d+1)
+        where (x',r) = divMod x d -- cociente y resto
+ --d--
+p_factores x = x > 0 ==> (product (factPrimos x)) == x
+--OK, passed 100 tests.
