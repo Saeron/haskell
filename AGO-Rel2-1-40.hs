@@ -298,8 +298,18 @@ p_sinRepes' xs = (nub' xs) `todosEn` xs && distintos (nub' xs)
 --passed 100 tests.
 
 --Ejercicios 24--
+--a--
 binarios :: Int -> [[Char]]
 binarios 0 = [[]]
 binarios n = (map ('0':) sub) ++ (map ('1':) sub)
     where sub = binarios (n-1)
+--b--
+p_binarios n = n>=0 && n<=2 ==> long xss == 2^n && distintos xss && all (`todosEn` "01") xss
+  where xss = binarios n
+
+long :: [a] -> Integer
+long xs = fromIntegral (length xs)
+--Gave up! Passed only 64 tests.
+--Hay que reducir el valor de n en otro caso tarda mucho, yo lo reduci a 2
+
 --Ejercicio 31--
