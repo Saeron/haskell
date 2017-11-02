@@ -10,6 +10,7 @@
 ----
 ---------------------------------------------------------------------------------
 import Test.QuickCheck
+import Data.List
 --Ejercicio 1--
 data Direction = North | South | East | West
      deriving (Eq,Ord,Enum,Show)
@@ -245,7 +246,7 @@ factPrimos x = fp x 2
  --Se para en x' < d por que eso significa que el divisor es el dividendo,
  -- ya no hay mas que dividir
  --c--
-factPrimos' :: Integer -> [Integer]
+factPrimos' :: Int -> [Int]
 factPrimos' x = fp x 2
   where
      fp x d
@@ -259,10 +260,46 @@ p_factores x = x > 0 ==> (product (factPrimos x)) == x
 --OK, passed 100 tests.
 
 --Ejercicio 19--
+--a--
 mezcla :: [Int] -> [Int] -> [Int]
-mezcla (x:xs) (y:ys) | null (x:xs) = y:(mezcla (x:xs) ys)
-                     | null (y:ys) = x:(mezcla xs (y:ys))
-                     | x == y = x:(mezcla xs ys)
+mezcla [] ys = ys
+mezcla xs [] = xs
+mezcla (x:xs) (y:ys) | x == y = x:(mezcla xs ys)
                      | y < x  = y:(mezcla (x:xs) ys)
                      | y > x  = x:(mezcla xs (y:ys))
-                     | otherwise   = []
+--b--
+mcm'' :: Int -> Int -> Int
+mcm'' x y = foldr (*) 1 (mezcla (factPrimos' x) (factPrimos' y))
+--c--
+p_mcm'' x y = x>=0 && y>=0 ==> mcm'' x y == lcm x y
+--OK, passed 100 tests.
+--Ejercicio 23--
+--a--
+nub' :: Eq a => [a] -> [a]
+nub' [] = []
+nub' (x:xs) = x:(nub' (delete' x xs ))
+
+delete' :: Eq a => a -> [a] -> [a]
+delete' n [] = []
+delete' n (x:xs) = if n==x then delete' n xs else (x:(delete' n xs))
+
+--b--
+p_nub' xs = nub xs == nub' xs
+--passed 100 tests.
+--c--
+p_sinRepes xs = distintos (nub' xs)
+--No es suficiente por que pueden aparecer en otro orden, o aprecer menos elementos
+--passed 100 tests.
+--d--
+todosEn :: (Eq a) => [a] -> [a] -> Bool
+ys `todosEn` xs = all (`elem` xs) ys
+
+p_sinRepes' xs = (nub' xs) `todosEn` xs && distintos (nub' xs)
+--passed 100 tests.
+
+--Ejercicios 24--
+binarios :: Int -> [[Char]]
+binarios 0 = [[]]
+binarios n = (map ('0':) sub) ++ (map ('1':) sub)
+    where sub = binarios (n-1)
+--Ejercicio 31--
