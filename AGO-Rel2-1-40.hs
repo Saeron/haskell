@@ -257,3 +257,12 @@ factPrimos' x = fp x 2
  --d--
 p_factores x = x > 0 ==> (product (factPrimos x)) == x
 --OK, passed 100 tests.
+
+--Ejercicio 19--
+mezcla :: [Int] -> [Int] -> [Int]
+mezcla (x:xs) (y:ys) | null (x:xs) = y:(mezcla (x:xs) ys)
+                     | null (y:ys) = x:(mezcla xs (y:ys))
+                     | x == y = x:(mezcla xs ys)
+                     | y < x  = y:(mezcla (x:xs) ys)
+                     | y > x  = x:(mezcla xs (y:ys))
+                     | otherwise   = []
