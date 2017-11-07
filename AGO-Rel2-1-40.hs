@@ -273,6 +273,20 @@ mcm'' x y = foldr (*) 1 (mezcla (factPrimos' x) (factPrimos' y))
 --c--
 p_mcm'' x y = x>=0 && y>=0 ==> mcm'' x y == lcm x y
 --OK, passed 100 tests.
+--Ejercicio 20--
+--a--
+mezc' :: [Int] -> [Int] -> [Int]
+mezc' [] ys = []
+mezc' xs [] = []
+mezc' (x:xs) (y:ys) | x == y = x:(mezc' xs ys)
+                    | x > y  = mezc' (x:xs) ys
+                    | y > x  = mezc' xs (y:ys)
+--b--
+mcd' :: Int -> Int -> Int
+mcd' x y = foldr (*) 1 (mezc' (factPrimos' x) (factPrimos' y))
+--c--
+p_mcd' x y = x>0 && y>0 ==> mcd' x y == gcd x y
+
 --Ejercicio 23--
 --a--
 nub' :: Eq a => [a] -> [a]
