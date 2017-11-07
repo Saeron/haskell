@@ -289,7 +289,12 @@ p_mcd' x y = x>0 && y>0 ==> mcd' x y == gcd x y
 --OK, passed 100 tests.
 
 --Ejercicio 21--
---p_neutroDer [a] = True ==> ([a]++[]) == [a]
+p_neutroDer xs = xs++[] == xs
+--OK, passed 100 tests.
+
+--Ejercicio 22--
+p_asociativa xs ys = xs++ys == ys++xs
+--OK, passed 100 tests.
 
 --Ejercicio 23--
 --a--
