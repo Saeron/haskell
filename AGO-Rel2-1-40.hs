@@ -286,6 +286,10 @@ mcd' :: Int -> Int -> Int
 mcd' x y = foldr (*) 1 (mezc' (factPrimos' x) (factPrimos' y))
 --c--
 p_mcd' x y = x>0 && y>0 ==> mcd' x y == gcd x y
+--OK, passed 100 tests.
+
+--Ejercicio 21--
+--p_neutroDer [a] = True ==> ([a]++[]) == [a]
 
 --Ejercicio 23--
 --a--
