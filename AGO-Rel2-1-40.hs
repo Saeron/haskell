@@ -291,7 +291,6 @@ p_mcd' x y = x>0 && y>0 ==> mcd' x y == gcd x y
 --Ejercicio 21--
 p_neutroDer xs = xs++[] == xs
 --OK, passed 100 tests.
-
 --Ejercicio 22--
 p_asociativa xs ys = xs++ys == ys++xs
 --OK, passed 100 tests.
@@ -335,4 +334,19 @@ long xs = fromIntegral (length xs)
 --Gave up! Passed only 64 tests.
 --Hay que reducir el valor de n en otro caso tarda mucho, yo lo reduci a 2
 
+--Ejercicio 25--
+--a--
+{-
+varRep :: Int -> a -> [[a]]
+varRep 0 x  = [[]]
+varRep n xs = (map (head l:) sub ++ (map (head l:) sub))
+   where sub = xs
+         l
+-}
+
 --Ejercicio 31--
+facts :: [Integer]
+facts = factsAux 1 1
+
+factsAux :: Integer -> Integer -> [Integer]
+factsAux n p = [p]++(factsAux (n+1) (p*n))
