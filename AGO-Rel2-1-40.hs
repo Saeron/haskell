@@ -344,6 +344,11 @@ varRep n xs = (map (head l:) sub ++ (map (head l:) sub))
          l
 -}
 
+--Ejercicio 28--
+--inteDef :: (a->b) -> Double -> Double -> Double -> Double
+--inteDef f a b e | (b-a) < e = (inteDef f a (a+b)/2 e) + (inteDef f (a+b)/2 b e)
+
+
 --Ejercicio 31--
 facts :: [Integer]
 facts = factsAux 1 1
