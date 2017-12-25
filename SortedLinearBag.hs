@@ -195,19 +195,25 @@ en cuenta las ocurrencias de cada elemento.
 --------------------------------------------------------
 
 union :: Ord a => Bag a -> Bag a -> Bag a
-union s Empty = undefined
-union Empty s =  undefined
-union (Node x ox s) (Node y oy t) = undefined
+union s Empty = s
+union Empty s = s
+union (Node x ox s) (Node y oy t) | x==y = (Node x (ox+oy) (union s t))
+                                  | x<y  = (Node x ox (union s (Node y oy t)))
+                                  | x>y  = (Node y oy (union (Node x ox s) t))
 
 intersection :: Ord a => Bag a -> Bag a -> Bag a
-intersection s Empty = undefined
-intersection Empty s = undefined
-intersection (Node x ox s) (Node y oy t) = undefined
+intersection s Empty = Empty
+intersection Empty s = Empty
+intersection (Node x ox s) (Node y oy t) | x==y = (Node x (min ox oy) (intersection s t))
+                                         | x<y  = (intersection s (Node y oy t))
+                                         | x>y  = (intersection (Node x ox s) t)
 
 difference :: Ord a => Bag a -> Bag a -> Bag a
-difference s Empty = undefined
-difference Empty s = undefined
-difference (Node x ox s) (Node y oy t) = undefined
+difference s Empty = s
+difference Empty s = Empty
+difference (Node x ox s) (Node y oy t) | x==y = if (ox>oy) then (Node x (ox-oy) (difference s t)) else (difference s t)
+                                       | x<y  = (Node x ox (difference s (Node y oy t)))
+                                       | x>y  = (difference (Node x ox s) t) 
 
 --------------------------------------------------------
 --------------------------------------------------------
