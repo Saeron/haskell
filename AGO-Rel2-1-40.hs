@@ -313,3 +313,5 @@ long xs = fromIntegral (length xs)
 --Hay que reducir el valor de n en otro caso tarda mucho, yo lo reduci a 2
 
 --Ejercicio 31--
+loco :: Int -> Int -> Int
+loco x y =    
